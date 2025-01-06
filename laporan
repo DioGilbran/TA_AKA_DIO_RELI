@@ -1,0 +1,107 @@
+Tugas Akhir : Analisis Kompleksitas Algoritma
+
+Anggota Kelompok :
+Reli Gita Nurhidayati  (2311102025) - IF 11 01
+Dio Gilbran Pramana (2311102062)  - IF 11 01
+
+Penelitian ini membahas algoritma rekomendasi film di platform streaming, khususnya setelah pengguna selesai menonton. 
+Content-Based Filtering merekomendasikan film berdasarkan fitur seperti genre atau aktor, sementara Collaborative Filtering 
+mengandalkan kesamaan preferensi antar pengguna. Analisis kompleksitas kedua pendekatan ini bertujuan mengukur efisiensi dan 
+akurasi dalam mengelola data yang cukup besar.
+
+Fitur :
+- Implementasi algoritma Content-Based Filtering (CBF) baik secara iteratif maupun rekursif.
+- Implementasi algoritma Collaborative Filtering (CF) baik secara iteratif maupun rekursif.
+- Pengguna dapat memasukkan jumlah data film yang akan dianalisis (n) untuk menguji performa algoritma pada berbagai ukuran dataset.
+- Menampilkan hasil rekomendasi berdasarkan algoritma Content-Based Filtering untuk kedua metode (iteratif dan rekursif).
+- Mengukur dan menampilkan waktu eksekusi algoritma Collaborative Filtering untuk kedua metode (iteratif dan rekursif).
+- Perbandingan waktu eksekusi algoritma Content-Based Filtering dan Collaborative Filtering ditampilkan dalam bentuk tabel yang rapi.
+- Menampilkan grafik perbandingan waktu eksekusi antara metode iteratif dan rekursif untuk kedua algoritma.
+- Tabel dan grafik memvisualisasikan waktu eksekusi dalam detik berdasarkan ukuran input (n).
+- Data film dan rating dummy diperbesar untuk menguji performa algoritma pada dataset yang lebih kompleks.
+- Program dilengkapi dengan validasi input dan interaksi pengguna untuk memastikan pengalaman penggunaan yang baik.
+
+# Fungsi Content-Based Filtering Iteratif
+def content_based_filtering_iterative(films, user_preferences):
+    recommendations = []
+    for film in films:
+        match_score = 0
+        for genre in film["genres"]:
+            if genre in user_preferences["preferred_genres"]:
+                match_score += 1
+        if match_score > 0:
+            recommendations.append({"film": film, "score": match_score})
+    return recommendations
+
+# Fungsi Content-Based Filtering Rekursif
+def content_based_filtering_recursive(films, user_preferences, index=0, recommendations=None):
+    if recommendations is None:
+        recommendations = []
+    if index == len(films):
+        return recommendations
+    match_score = sum(1 for genre in films[index]["genres"] if genre in user_preferences["preferred_genres"])
+    if match_score > 0:
+        recommendations.append({"film": films[index], "score": match_score})
+    return content_based_filtering_recursive(films, user_preferences, index + 1, recommendations)
+
+# Fungsi Collaborative Filtering Iteratif
+def collaborative_filtering_iterative(ratings, target_user):
+    similarities = []
+    for user_index, user_ratings in enumerate(ratings):
+        if user_index != target_user:
+            similarity = sum(r1 * r2 for r1, r2 in zip(ratings[target_user], user_ratings))
+            similarities.append((user_index, similarity))
+    return similarities
+
+# Fungsi Collaborative Filtering Rekursif
+def collaborative_filtering_recursive(ratings, target_user, user_index=0, similarities=None):
+    if similarities is None:
+        similarities = []
+    if user_index == len(ratings):
+        return similarities
+    if user_index != target_user:
+        similarity = sum(r1 * r2 for r1, r2 in zip(ratings[target_user], ratings[user_index]))
+        similarities.append((user_index, similarity))
+    return collaborative_filtering_recursive(ratings, target_user, user_index + 1, similarities)
+
+Output :
+Run 1 - Analisis Komparasi:
+Masukkan jumlah data (n): 30
+ n  CB Recursive Time (s)  CB Iterative Time (s)  CF Recursive Time (s)  CF Iterative Time (s)
+30               0.000079               0.000028               0.000092               0.000064
+
+Run 2 - Analisis Komparasi:
+Masukkan jumlah data (n): 60
+ n  CB Recursive Time (s)  CB Iterative Time (s)  CF Recursive Time (s)  CF Iterative Time (s)
+30               0.000079               0.000028               0.000092               0.000064
+60               0.000124               0.000047               0.000167               0.000141
+
+Run 3 - Analisis Komparasi:
+Masukkan jumlah data (n): 100
+  n  CB Recursive Time (s)  CB Iterative Time (s)  CF Recursive Time (s)  CF Iterative Time (s)
+ 30               0.000079               0.000028               0.000092               0.000064
+ 60               0.000124               0.000047               0.000167               0.000141
+100               0.000233               0.000067               0.000244               0.000230
+
+Run 4 - Analisis Komparasi:
+Masukkan jumlah data (n): 300
+  n  CB Recursive Time (s)  CB Iterative Time (s)  CF Recursive Time (s)  CF Iterative Time (s)
+ 30               0.000079               0.000028               0.000092               0.000064
+ 60               0.000124               0.000047               0.000167               0.000141
+100               0.000233               0.000067               0.000244               0.000230
+300               0.000674               0.000229               0.000233               0.000268
+
+Run 5 - Analisis Komparasi:
+Masukkan jumlah data (n): 500
+  n  CB Recursive Time (s)  CB Iterative Time (s)  CF Recursive Time (s)  CF Iterative Time (s)
+ 30               0.000079               0.000028               0.000092               0.000064
+ 60               0.000124               0.000047               0.000167               0.000141
+100               0.000233               0.000067               0.000244               0.000230
+300               0.000674               0.000229               0.000233               0.000268
+500               0.001371               0.000416               0.000240               0.000228
+
+Output Grafik :
+
+
+
+
