@@ -12,7 +12,7 @@ akurasi dalam mengelola data yang cukup besar.
 Fitur :
 - Implementasi algoritma Content-Based Filtering (CBF) baik secara iteratif maupun rekursif.
 - Implementasi algoritma Collaborative Filtering (CF) baik secara iteratif maupun rekursif.
-- Pengguna dapat memasukkan jumlah data film yang akan dianalisis (n) untuk menguji performa algoritma pada berbagai ukuran dataset.
+- Penguji dapat memasukkan jumlah data film yang akan dianalisis (n) untuk menguji performa algoritma pada berbagai ukuran dataset.
 - Menampilkan hasil rekomendasi berdasarkan algoritma Content-Based Filtering untuk kedua metode (iteratif dan rekursif).
 - Mengukur dan menampilkan waktu eksekusi algoritma Collaborative Filtering untuk kedua metode (iteratif dan rekursif).
 - Perbandingan waktu eksekusi algoritma Content-Based Filtering dan Collaborative Filtering ditampilkan dalam bentuk tabel yang rapi.
@@ -100,7 +100,6 @@ Masukkan jumlah data (n): 500
 300               0.000674               0.000229               0.000233               0.000268
 500               0.001371               0.000416               0.000240               0.000228
 
-Output Grafik :
 
 
 
